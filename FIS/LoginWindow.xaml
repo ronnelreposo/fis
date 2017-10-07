@@ -1,0 +1,40 @@
+﻿<mui:ModernWindow x:Class="FIS.LoginWindow"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  mc:Ignorable="d"
+                  ResizeMode="NoResize"
+                  Style="{StaticResource BlankWindow}"      
+                  Width="340" Height="487" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen" IsTabStop="False" HorizontalAlignment="Center" VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" UseLayoutRounding="True" ShowActivated="False" >
+    <mui:ModernWindow.TaskbarItemInfo>
+        <TaskbarItemInfo/>
+    </mui:ModernWindow.TaskbarItemInfo>
+    <Grid HorizontalAlignment="Center" Margin="25,0" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="125"/>
+            <ColumnDefinition Width="125"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="104"/>
+            <RowDefinition Height="64"/>
+            <RowDefinition  Height="40"/>
+            <RowDefinition  Height="27"/>
+            <RowDefinition  Height="27"/>
+            <RowDefinition  Height="14"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <!--<Path Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Fill="{StaticResourceResourceKey=AccentColor}" HorizontalAlignment="Center"  Stretch="Fill" UseLayoutRounding="False" Width="64" Data="M32,11.428093 C39.57143,11.428093 45.714287,17.57095 45.714287,25.14238 C45.714287,32.713806 39.57143,38.856667 32,38.856667 C24.428572,38.856667 18.285715,32.713806 18.285715,25.14238 C18.285715,17.57095 24.428572,11.428093 32,11.428093 z M32,4.57095 C16.892859,4.5709496 4.5714288,16.89238 4.5714288,31.999523 C4.5714288,38.070953 6.5714288,43.678093 9.8928576,48.249523 C11.178572,41.856667 14.285715,36.570953 20.82143,36.570953 C23.714287,39.39238 27.642859,41.14238 32,41.14238 C36.357143,41.14238 40.285717,39.39238 43.178574,36.570953 C49.714287,36.570953 52.82143,41.856667 54.107143,48.249523 C57.428574,43.678093 59.428574,38.070953 59.428574,31.999523 C59.428574,16.89238 47.107143,4.5709496 32,4.57095 z M32,-0.00048065186 C49.678574,-0.00048065186 64,14.32095 64,31.999523 C64,49.570953 49.750004,63.999523 32,63.999523 C14.285715,63.999523 0,49.606667 1.1368684E-13,31.999523 C0,14.32095 14.321429,-0.00048065186 32,-0.00048065186 z" />-->
+        <Path Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Fill="#FFD1D1D1" HorizontalAlignment="Center"  Stretch="Fill" UseLayoutRounding="False" Width="64" Data="M32,11.428093 C39.57143,11.428093 45.714287,17.57095 45.714287,25.14238 C45.714287,32.713806 39.57143,38.856667 32,38.856667 C24.428572,38.856667 18.285715,32.713806 18.285715,25.14238 C18.285715,17.57095 24.428572,11.428093 32,11.428093 z M32,4.57095 C16.892859,4.5709496 4.5714288,16.89238 4.5714288,31.999523 C4.5714288,38.070953 6.5714288,43.678093 9.8928576,48.249523 C11.178572,41.856667 14.285715,36.570953 20.82143,36.570953 C23.714287,39.39238 27.642859,41.14238 32,41.14238 C36.357143,41.14238 40.285717,39.39238 43.178574,36.570953 C49.714287,36.570953 52.82143,41.856667 54.107143,48.249523 C57.428574,43.678093 59.428574,38.070953 59.428574,31.999523 C59.428574,16.89238 47.107143,4.5709496 32,4.57095 z M32,-0.00048065186 C49.678574,-0.00048065186 64,14.32095 64,31.999523 C64,49.570953 49.750004,63.999523 32,63.999523 C14.285715,63.999523 0,49.606667 1.1368684E-13,31.999523 C0,14.32095 14.321429,-0.00048065186 32,-0.00048065186 z" />
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Username:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,7.361,1.7,6.638" />
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="usernameTextBox" Margin="2,2,18,2" />
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Password:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,7.361,1.726,6.638" />
+        <PasswordBox Grid.Row="4" Grid.Column="1" x:Name="passwordPasswordBox" Margin="2,2,18,2"  />
+
+        <Button Grid.Row="6" x:Name="registerButton" Grid.Column="0" HorizontalAlignment="Right" Content="Register" Margin="0,0,2,0" Width="105" FontSize="12"/>
+        <Button Grid.Row="6" x:Name="loginButton" Grid.Column="1" HorizontalAlignment="Left" Content="Log In" IsDefault="True" Margin="2,0,0,0" FontWeight="Bold" Width="105" FontSize="12" />
+    </Grid>
+</mui:ModernWindow>

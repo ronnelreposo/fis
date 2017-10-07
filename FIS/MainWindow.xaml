@@ -1,0 +1,59 @@
+﻿<mui:ModernWindow x:Class="FIS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI" IsTitleVisible="False"
+        ContentSource="/Pages/Home.xaml" Height="650" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Closing="ModernWindow_Closing">
+    <mui:ModernWindow.TaskbarItemInfo>
+        <TaskbarItemInfo/>
+    </mui:ModernWindow.TaskbarItemInfo>
+
+    <mui:ModernWindow.MenuLinkGroups>
+        <mui:LinkGroup DisplayName="HOME">
+            <mui:LinkGroup.Links>
+                <mui:Link Source="/Pages/Home.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="TRAINING">
+            <mui:LinkGroup.Links>
+                <mui:Link Source="/Pages/Training.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="HONORARIUM">
+            <mui:LinkGroup.Links>
+                <mui:Link Source="/Pages/Honorarium.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="FACULTY">
+            <mui:LinkGroup.Links>
+                <mui:Link Source="/Pages/Faculty.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="ACCOUNT">
+            <mui:LinkGroup.Links>
+                <mui:Link Source="/Pages/Register.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="LEAVE APPLICATION">
+            <mui:LinkGroup.Links>
+                <mui:Link Source="/Pages/Leave Application.xaml"/>
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="TRAVEL ORDER">
+            <mui:LinkGroup.Links>
+                <mui:Link Source="/Pages/Travel Order.xaml"/>
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="settings" GroupKey="settings">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="software" Source="/Pages/SettingsPage.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+    </mui:ModernWindow.MenuLinkGroups>
+    
+    <mui:ModernWindow.TitleLinks>
+        <mui:Link DisplayName="SETTINGS" Source="/Pages/SettingsPage.xaml" />
+        <mui:Link DisplayName="LOGOUT" x:Name="logout" Source="Pages/Logout.xaml" />
+    </mui:ModernWindow.TitleLinks>
+</mui:ModernWindow>
