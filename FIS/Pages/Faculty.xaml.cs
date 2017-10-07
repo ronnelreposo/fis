@@ -113,12 +113,6 @@ namespace FIS.Pages
               select x.Fields )
                 .Subscribe(/*async*/ async fields =>
                 {
-                    /**
-                     *  re-arrange according to UI.
-                     *  !arrangement of parameters is critical.
-                     *  consider other solutions.
-                     */
-
                     var basicInfo = fields.BasicInfo;
                     var contactInfo = fields.ContactInfo;
                     var employmentInfo = fields.EmploymentInfo;
@@ -139,8 +133,6 @@ namespace FIS.Pages
                     await QueryAsync("add_faculty", param_value_xs,
                         ex => MessageBox.Show("Faculty Member unable to save."),
                         _ => MessageBox.Show("Faculty Member Saved."));
-
-                    var fromQueryAsync = FromAsync()
                 });
         }
 
