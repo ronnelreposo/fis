@@ -24,8 +24,10 @@ namespace FIS
 
             var sLoginClick = loginButton.StreamClickEvent();
 
-            registerButton
-                .StreamClickEvent()
+            var sRegisterClick = registerButton.StreamClickEvent();
+            sRegisterClick
+                .Do(_ => usernameTextBox.Text = string.Empty)
+                .Do(_ => passwordPasswordBox.Password = string.Empty)
                 .Subscribe(_ => new FacultyRegistrationWindow().ShowDialog());
 
             ( from evt in FromEventPattern<CancelEventArgs>(this, "Closing")
