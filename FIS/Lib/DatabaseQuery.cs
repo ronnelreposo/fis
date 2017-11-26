@@ -42,6 +42,33 @@ namespace FIS.Lib
             finally { await command.Connection.CloseAsync(); }
             return command;
         }
+
+        internal static async Task<MySqlCommand> QueryAsync (string Procedure, Tuple<string, object> paramValue, Action<Exception> onFail)
+        {
+            Requires(string.IsNullOrEmpty(Procedure));
+            Requires(paramValue != null);
+
+            var param = paramValue.Item1;
+            var value = paramValue.Item2;
+            Requires(string.IsNullOrEmpty(param));
+            Requires(value != null);
+
+            var atParam = "@" + param;
+            var command = ConnectedCommand
+                .CallProcedure(Procedure: Procedure, QueryParameter: atParam)
+                .WithParameter(ParameterValue: Create(atParam, value));
+
+            try
+            {
+                await command.Connection.OpenAsync();
+                await command.ExecuteNonQueryAsync();
+                return command;
+            }
+            catch ( Exception ex ) { onFail(ex); }
+            finally { await command.Connection.CloseAsync(); }
+            return command;
+        }
+
         internal static async Task<MySqlCommand> QueryAsync (string procedure, Tuple<string[], object[]> paramValues, Action<Exception> onFail, Action<MySqlCommand> onSuccess)
         {
             Requires(string.IsNullOrEmpty(procedure), "Procedure must not be null or empty.");
