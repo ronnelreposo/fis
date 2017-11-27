@@ -182,7 +182,7 @@ namespace FIS.Windows.LogIn
 
             logInStream.Subscribe(streams =>
                 streams.SPasswordMatch
-                .Subscribe(mainWindow_ => HideAndShow(LogInControls.LogInWindow)(LogInControls.MainWindow)));
+                .Subscribe(mainWindow_ => HideAndShow(LogInControls.LogInWindow)(new MainWindow())));
 
             logInStream.Subscribe(streams =>
                 streams.SPasswordNotMatch
