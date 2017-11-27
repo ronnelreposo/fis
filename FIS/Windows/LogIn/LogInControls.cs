@@ -9,7 +9,6 @@ namespace FIS.Windows.LogIn
         internal PasswordBox PasswordPasswordBox { get; private set; }
         internal Button RegisterButton { get; private set; }
         internal Button LogInButton { get; private set; }
-        internal ModernWindow RegistrationWindow { get; private set; }
         internal ModernWindow MainWindow { get; private set; }
         internal ModernWindow LogInWindow { get; private set; }
 
@@ -18,7 +17,6 @@ namespace FIS.Windows.LogIn
             PasswordBox PasswordPasswordBox,
             Button RegisterButton,
             Button LogInButton,
-            ModernWindow RegistrationWindow,
             ModernWindow MainWindow,
             ModernWindow LogInWindow)
         {
@@ -26,7 +24,6 @@ namespace FIS.Windows.LogIn
             this.PasswordPasswordBox = PasswordPasswordBox;
             this.RegisterButton = RegisterButton;
             this.LogInButton = LogInButton;
-            this.RegistrationWindow = RegistrationWindow;
             this.MainWindow = MainWindow;
             this.LogInWindow = LogInWindow;
         }
@@ -36,7 +33,6 @@ namespace FIS.Windows.LogIn
             PasswordBox PasswordPasswordBox,
             Button RegisterButton,
             Button LogInButton,
-            ModernWindow RegistrationWindow,
             ModernWindow MainWindow,
             ModernWindow LogInWindow)
             => new LogInControls(
@@ -44,7 +40,6 @@ namespace FIS.Windows.LogIn
                 PasswordPasswordBox,
                 RegisterButton,
                 LogInButton,
-                RegistrationWindow,
                 MainWindow,
                 LogInWindow);
     }
