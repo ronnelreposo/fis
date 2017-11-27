@@ -51,7 +51,7 @@ namespace FIS.Windows.LogIn
         /// </summary>
         /// <returns>IObservable<Window>: FacultyRegistrationWindow</returns>
         IObservable<Window> RegisterStreamClickEventToFacultyRegistrationWindow () =>
-            from evt in registerStreamClickEvent select LogInControls.RegistrationWindow;
+            from evt in registerStreamClickEvent select new FacultyRegistrationWindow();
 
         /// <summary>
         /// SetUp On Closing Stream Event
