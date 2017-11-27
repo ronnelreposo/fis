@@ -3,6 +3,9 @@ using System.Windows.Controls;
 
 namespace FIS.Windows.LogIn
 {
+    /// <summary>
+    /// A data class that represents the LogInControls used in LogInReactiveEngine class.
+    /// </summary>
     class LogInControls
     {
         internal TextBox UsernameTextBox { get; private set; }
