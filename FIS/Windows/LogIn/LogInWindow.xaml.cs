@@ -16,7 +16,6 @@ namespace FIS.Windows.LogIn
                     PasswordPasswordBox: passwordPasswordBox,
                     RegisterButton: registerButton,
                     LogInButton: loginButton,
-                    MainWindow: new MainWindow(),
                     LogInWindow: this);
 
             LogInReactiveEngine
