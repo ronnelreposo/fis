@@ -2,6 +2,9 @@
 
 namespace FIS.Windows.LogIn
 {
+    /// <summary>
+    /// A data class that represents the LogInFields used in LogInReactiveEngine.
+    /// </summary>
     struct LogInFields
     {
         internal string Username { get; private set; }
