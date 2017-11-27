@@ -132,7 +132,7 @@ namespace FIS.Windows.LogIn
                                        select isPasswordHashMatch
            let sPasswordMatch = from isPasswordMatch in sQueryAccountToPasswordMatch
                                 where isPasswordMatch
-                                select LogInControls.MainWindow
+                                select new MainWindow()
            let sPasswordNotMatch = from isPasswordMatch in sQueryAccountToPasswordMatch
                                    where !isPasswordMatch
                                    select LogInControls.LogInWindow
