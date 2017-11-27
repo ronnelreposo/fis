@@ -2,6 +2,7 @@
 using System;
 using System.Windows;
 using FIS.Lib;
+using FIS.Windows.LogIn;
 
 namespace FIS
 {
@@ -19,8 +20,8 @@ namespace FIS
     {
       var confirmation = ModernDialog.ShowMessage("Are you sure you want to exit?", "Exit Confirmation", MessageBoxButton.YesNo);
       if (confirmation == MessageBoxResult.Yes) {
-        e.Cancel = false;
-        new LoginWindow().Show();
+        e.Cancel = false; 
+        new LogInWindow().Show();
         return;
       }
       e.Cancel = true;
