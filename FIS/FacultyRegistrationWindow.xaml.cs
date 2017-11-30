@@ -31,11 +31,11 @@ namespace FIS
                                   let isUsernameEmpty = string.IsNullOrEmpty(username.Trim())
                                   let isPasswordEmpty = string.IsNullOrEmpty(password.Trim())
                                   let isPasswordConfirmationEmpty = string.IsNullOrEmpty(passwordConfirmation)
-                                  let isPasswordConfirmationMatch = password.Equals(passwordConfirmation)
+                                  let isPasswordConfirmationDidNotMatch = !password.Equals(passwordConfirmation)
                                   let errorField = isUsernameEmpty ? Some("Username is required.") :
                                                     isPasswordEmpty ? Some("Password is required.") :
                                                     isPasswordConfirmationEmpty ?  Some("Password Confirmation is required.")  :
-                                                    isPasswordConfirmationMatch ? Some("Password Confirmation doesn't match.") : None
+                                                    isPasswordConfirmationDidNotMatch ? Some("Password Confirmation doesn't match.") : None
                                   select new
                                   {
                                       Username = username,

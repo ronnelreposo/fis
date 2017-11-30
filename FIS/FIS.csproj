@@ -75,13 +75,16 @@
     <Compile Include="Lib\Lin.cs" />
     <Compile Include="Lib\Option.cs" />
     <Compile Include="Lib\Util.cs" />
+    <Compile Include="Windows\LogIn\LogInControls.cs" />
+    <Compile Include="Windows\LogIn\LogInFields.cs" />
+    <Compile Include="Windows\LogIn\LogInReactiveEngine.cs" />
+    <Compile Include="Windows\LogIn\LogInStreams.cs" />
     <Compile Include="Records\FacultyRec.cs" />
     <Compile Include="Records\PersonalRec.cs" />
+    <Compile Include="Windows\LogIn\LogInWindow.xaml.cs">
+      <DependentUpon>LogInWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="FacultyRegistrationWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -163,7 +166,6 @@
     </Page>
     <Compile Include="Extensions\ButtonExt.cs" />
     <Compile Include="FacultyRegistrationWindow.xaml.cs" />
-    <Compile Include="LoginWindow.xaml.cs" />
     <Compile Include="MainWindow.xaml.cs" />
     <Compile Include="Extensions\MySqlCommandExt.cs" />
     <Compile Include="Pages\Faculty.xaml.cs" />
@@ -226,6 +228,10 @@
     <Page Include="Pages\Travel Order.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\LogIn\LogInWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
