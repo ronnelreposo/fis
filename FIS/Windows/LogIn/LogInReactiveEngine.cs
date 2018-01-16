@@ -120,29 +120,29 @@ namespace FIS.Windows.LogIn
                    paramValue: Tuple.Create("username", fields.Username as object),
                    onFail: ex => MessageBox.Show(ex.Message)))
            let sQueryAccountUsernameDataTable = from command in sQueryAccountUsername
-                                 select new DataTable().FillWithCommand(command)
+                                                select new DataTable().FillWithCommand(command)
            let sQueryAccountUsernameHasRows = from dataTable in sQueryAccountUsernameDataTable
-                               where dataTable.HasRows()
-                               select dataTable
+                                              where dataTable.HasRows()
+                                              select dataTable
            let sQueryAccountToPasswordMatch = from dataTable in sQueryAccountUsernameHasRows
-                                       let firstRow = dataTable.Rows[0]
-                                       let strPasswordHash = encodedPasswordHash(firstRow, fields.Password, SaltColIndex: 3)
-                                       let storedPasswordHash = retrievePasswordHash(firstRow, PasswordColIndex: 2)
-                                       let isPasswordHashMatch = strPasswordHash.Equals(storedPasswordHash)
-                                       select isPasswordHashMatch
+                                              let firstRow = dataTable.Rows[0]
+                                              let strPasswordHash = encodedPasswordHash(firstRow, fields.Password, SaltColIndex: 3)
+                                              let storedPasswordHash = retrievePasswordHash(firstRow, PasswordColIndex: 2)
+                                              let isPasswordHashMatch = strPasswordHash.Equals(storedPasswordHash)
+                                              select isPasswordHashMatch
            let sPasswordMatch = from isPasswordMatch in sQueryAccountToPasswordMatch
                                 where isPasswordMatch
                                 select new MainWindow()
            let sPasswordNotMatch = from isPasswordMatch in sQueryAccountToPasswordMatch
                                    where !isPasswordMatch
                                    select LogInControls.LogInWindow
-           let sQueryHasNoRows = from dataTable in sQueryAccountUsernameDataTable
-                                 where !dataTable.HasRows()
-                                 select LogInControls.LogInWindow
+           let sUsernameNotRegistered = from dataTable in sQueryAccountUsernameDataTable
+                                      where !dataTable.HasRows()
+                                      select LogInControls.LogInWindow
            select LogInStreams.Create(
                SPasswordMatch: sPasswordMatch,
                SPasswordNotMatch: sPasswordNotMatch,
-               SUsernameNotRegistered: sQueryHasNoRows);
+               SUsernameNotRegistered: sUsernameNotRegistered);
 
         /// <summary>
         /// On Registration Set Up
