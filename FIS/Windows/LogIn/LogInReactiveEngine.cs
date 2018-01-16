@@ -196,7 +196,7 @@ namespace FIS.Windows.LogIn
                 .Subscribe(mainWindow_ =>
                     HideAndShow(LogInControls.LogInWindow)(new MainWindow()));
 
-                /* When passoword does not match. */
+                /* When password does not match. */
                 streams.SPasswordNotMatch
                 .Subscribe(@this =>
                     ShowMessage(text: "Your password is incorrect",
