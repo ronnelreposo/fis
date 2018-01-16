@@ -79,7 +79,7 @@
     <Compile Include="Windows\LogIn\LogInFields.cs" />
     <Compile Include="Windows\LogIn\LogInReactiveEngine.cs" />
     <Compile Include="Windows\LogIn\LogInStreams.cs" />
-    <Compile Include="Records\FacultyRec.cs" />
+    <Compile Include="Records\Faculty.cs" />
     <Compile Include="Records\PersonalRec.cs" />
     <Compile Include="Windows\LogIn\LogInWindow.xaml.cs">
       <DependentUpon>LogInWindow.xaml</DependentUpon>
