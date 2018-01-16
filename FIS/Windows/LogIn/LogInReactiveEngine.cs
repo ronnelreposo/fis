@@ -20,15 +20,26 @@ namespace FIS.Windows.LogIn
     /// </summary>
     class LogInReactiveEngine
     {
+        /// <summary>
+        /// Log In Controls Data.
+        /// </summary>
         internal LogInControls LogInControls { get; private set; }
-        IObservable<EventPattern<EventArgs>> registerStreamClickEvent { get; set; }
-        IObservable<EventPattern<EventArgs>> logInStreamClickEvent { get; set; }
+
+        /// <summary>
+        /// Stream of Register Click Event.
+        /// </summary>
+        IObservable<EventPattern<EventArgs>> sRegisterClickEvent { get; set; }
+
+        /// <summary>
+        /// Stream of Log In Click Event.
+        /// </summary>
+        IObservable<EventPattern<EventArgs>> sLogInClickEvent { get; set; }
 
         LogInReactiveEngine (LogInControls LogInControls)
         {
             this.LogInControls = LogInControls;
-            registerStreamClickEvent = LogInControls.RegisterButton.StreamClickEvent();
-            logInStreamClickEvent = LogInControls.LogInButton.StreamClickEvent();
+            sRegisterClickEvent = LogInControls.RegisterButton.StreamClickEvent();
+            sLogInClickEvent = LogInControls.LogInButton.StreamClickEvent();
         }
 
         /// <summary>
@@ -36,22 +47,22 @@ namespace FIS.Windows.LogIn
         /// </summary> 
         /// <param name="LogInControls">LogInControls</param>
         /// <returns>new LogInReactiveEngine</returns>
-        internal static LogInReactiveEngine Create (LogInControls LogInControls)
-            => new LogInReactiveEngine(LogInControls);
+        internal static LogInReactiveEngine Create (LogInControls LogInControls) =>
+            new LogInReactiveEngine(LogInControls);
 
         /// <summary>
         /// Register Stream Click Event Mapped to Empty String
         /// </summary>
         /// <returns>IObservable: EmptyString</returns>
         IObservable<string> RegisterStreamClickEventToEmptyString () =>
-            from evt in registerStreamClickEvent select string.Empty;
+            from evt in sRegisterClickEvent select string.Empty;
 
         /// <summary>
         /// Register Stream Click Event Mapped To FacultyRegistrationWindow
         /// </summary>
         /// <returns>IObservable<Window>: FacultyRegistrationWindow</returns>
         IObservable<Window> RegisterStreamClickEventToFacultyRegistrationWindow () =>
-            from evt in registerStreamClickEvent select new FacultyRegistrationWindow();
+            from evt in sRegisterClickEvent select new FacultyRegistrationWindow();
 
         /// <summary>
         /// SetUp On Closing Stream Event
@@ -90,7 +101,7 @@ namespace FIS.Windows.LogIn
         /// </summary>
         /// <returns>LogInFields</returns>
         internal IObservable<LogInFields> LogInStreamClickToLogInFields () =>
-            from _ in logInStreamClickEvent
+            from _ in sLogInClickEvent
             let username = LogInControls.UsernameTextBox.Text.Trim()
             let password = LogInControls.PasswordPasswordBox.Password.Trim()
             let isUsernameEmpty = string.IsNullOrEmpty(username)
