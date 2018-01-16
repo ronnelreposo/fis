@@ -28,7 +28,7 @@ namespace FIS.Pages
         /// </summary>
         /// <param name="age">given age.</param>
         /// <returns>parsed age or 0.</returns>
-        int intTryParse(string age)
+        int intTryParseAge (string age)
         {
             try { return Math.Abs(int.Parse(age)); }
             catch ( Exception ) { return 0; }
@@ -51,14 +51,14 @@ namespace FIS.Pages
                                        FirstName = firstnameTextBox.Text,
                                        MiddleName = middlenameTextBox.Text,
                                        LastName = lastnameTextBox.Text,
-                                       Age = intTryParse(ageTextBox.Text),
+                                       Age = intTryParseAge(ageTextBox.Text),
                                        DateOfBirth = dateOfBirthOptional,
                                        PlaceOfBirth = placeofbirthTextBox.Text
                                    },
                                    ContactInfo = new
                                    {
                                        Address = addressTextBox.Text,
-                                       MobilePhone = mobilePhoneTextBox.Text
+                                       Phone = mobilePhoneTextBox.Text
                                    },
                                    EmploymentInfo = new
                                    {
@@ -79,7 +79,7 @@ namespace FIS.Pages
                                        let isPlaceOfBirthEmpty = IsNullOrEmpty(basicInfo.PlaceOfBirth)
                                        let contactInfo = fields.ContactInfo
                                        let isAddressEmpty = IsNullOrEmpty(contactInfo.Address)
-                                       let isMobilePhoneEmpty = IsNullOrEmpty(contactInfo.MobilePhone)
+                                       let isMobilePhoneEmpty = IsNullOrEmpty(contactInfo.Phone)
                                        let employeeInfo = fields.EmploymentInfo
                                        let isDateHiredNotSelected = employeeInfo.DateHired.IsNone
                                        let isStatusEmpty = IsNullOrEmpty(employeeInfo.Status)
@@ -101,17 +101,17 @@ namespace FIS.Pages
                                        }; /* end sFieldsAndErrorOnReg. */
 
             /* has error */
-            ( from x in sFieldsAndErrorOnReg
-              let error = x.Error
+            ( from fieldAndError in sFieldsAndErrorOnReg
+              let error = fieldAndError.Error
               where error.IsSome
               select error.Value )
                 .Subscribe(err => ShowMessage(err, string.Empty, MessageBoxButton.OK));
 
             /* has *no error */
-            ( from x in sFieldsAndErrorOnReg
-              where x.Error.IsNone
-              select x.Fields )
-                .Subscribe(/*async*/ async fields =>
+            ( from fieldAndError in sFieldsAndErrorOnReg
+              where fieldAndError.Error.IsNone
+              select fieldAndError.Fields )
+                .Subscribe(async fields =>
                 {
                     var basicInfo = fields.BasicInfo;
                     var contactInfo = fields.ContactInfo;
@@ -119,13 +119,13 @@ namespace FIS.Pages
                     var param_value_xs = Create<string[], object[]>(
                         new[] { "id", "firstname", "middlename",
                             "lastname", "age",
-                            "address", "cellphone",
+                            "address", "phone",
                             "dateOfBirth", "placeOfBirth",
                             "dateHired", "status" },
                         new[] {
                             basicInfo.ID, basicInfo.FirstName, basicInfo.MiddleName,
                             basicInfo.LastName, basicInfo.Age.ToString(),
-                            contactInfo.Address, contactInfo.MobilePhone,
+                            contactInfo.Address, contactInfo.Phone,
                             (basicInfo.DateOfBirth.Value).Value.ToShortDateString(), basicInfo.PlaceOfBirth,
                             (employmentInfo.DateHired.Value).Value.ToShortDateString(), employmentInfo.Status
                         });
@@ -136,29 +136,18 @@ namespace FIS.Pages
                 });
         }
 
-        string attachRequired(string field) => field + " is Required.";
+        string attachRequired (string field) => field + " is Required.";
 
         private void facultyupdateButton_Click (object sender, RoutedEventArgs e)
-        {
-            facultyupdateButton.Visibility = Visibility.Collapsed;
-            facultyregisterButton.Visibility = Visibility.Visible;
-        }
+            => MessageBox.Show("Not Implemented Yet.");
 
         private void facultydeleteButton_Click (object sender, RoutedEventArgs e)
-        {
-            facultydeleteButton.Visibility = Visibility.Collapsed;
-            facultyclearButton.Visibility = Visibility.Visible;
-        }
+            => MessageBox.Show("Not Implemented Yet.");
 
         private void facultyclearButton_Click (object sender, RoutedEventArgs e)
-        {
-            facultydeleteButton.Visibility = Visibility.Visible;
-            facultyclearButton.Visibility = Visibility.Collapsed;
-        }
+            => MessageBox.Show("Not Implemented Yet.");
 
         private void personalprofile_MouseEnter (object sender, MouseEventArgs e)
-        {
-            idTextBox.Text = "HELLO WORLD";
-        }
+            => MessageBox.Show("Not Implemented Yet.");
     }
 }
