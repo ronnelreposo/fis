@@ -142,7 +142,7 @@ namespace FIS.Windows.LogIn
            select LogInStreams.Create(
                SPasswordMatch: sPasswordMatch,
                SPasswordNotMatch: sPasswordNotMatch,
-               SQueryHasNoRows: sQueryHasNoRows);
+               SUsernameNotRegistered: sQueryHasNoRows);
 
         /// <summary>
         /// On Registration Set Up
@@ -178,29 +178,33 @@ namespace FIS.Windows.LogIn
         /// <returns>LogInReactiveEngine</returns>
         internal LogInReactiveEngine SetUpOnLogIn()
         {
-            var logInStream = LogInToStreams();
-
-            logInStream.Subscribe(streams =>
+            LogInToStreams().Subscribe(streams =>
+            {
+                /* When password matches. */
                 streams.SPasswordMatch
-                .Subscribe(mainWindow_ => HideAndShow(LogInControls.LogInWindow)(new MainWindow())));
+                .Subscribe(mainWindow_ =>
+                    HideAndShow(LogInControls.LogInWindow)(new MainWindow()));
 
-            logInStream.Subscribe(streams =>
+                /* When passoword does not match. */
                 streams.SPasswordNotMatch
-                .Subscribe(
-                    @this => ShowMessage(text: "Your password is incorrect",
-                    title: "Incorrect Password",
-                    button: MessageBoxButton.OK,
-                    owner: @this)));
+                .Subscribe(@this =>
+                    ShowMessage(text: "Your password is incorrect",
+                        title: "Incorrect Password",
+                        button: MessageBoxButton.OK,
+                        owner: @this));
 
-            logInStream.Subscribe(streams =>
-                streams.SQueryHasNoRows.Subscribe(
-                    @this => ShowMessage(text: "Username is not registered.",
-                    title: "unregistered username",
-                    button: MessageBoxButton.OK,
-                    owner: @this)));
+                /* When Username is not registered. */
+                streams.SUsernameNotRegistered
+                .Subscribe(@this =>
+                    ShowMessage(text: "Username is not registered.",
+                        title: "unregistered username",
+                        button: MessageBoxButton.OK,
+                        owner: @this));
+
+            }); /* end logInStream subscription. */
 
             return this;
-        }
+        } /* end SetUpOnLogIn */
 
         /// <summary>
         /// Encodes the given password to Password Hash.
