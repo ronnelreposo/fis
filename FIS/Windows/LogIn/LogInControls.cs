@@ -4,7 +4,7 @@ using System.Windows.Controls;
 namespace FIS.Windows.LogIn
 {
     /// <summary>
-    /// A data class that represents the LogInControls used in LogInReactiveEngine class.
+    /// A data class that represents the controls used in LogIn.
     /// </summary>
     class LogInControls
     {
