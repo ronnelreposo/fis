@@ -84,7 +84,7 @@
     <Compile Include="Windows\LogIn\LogInWindow.xaml.cs">
       <DependentUpon>LogInWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="FacultyRegistrationWindow.xaml">
+    <Page Include="Windows\Registration\Faculty\FacultyRegistrationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -165,7 +165,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="Extensions\ButtonExt.cs" />
-    <Compile Include="FacultyRegistrationWindow.xaml.cs" />
+    <Compile Include="Windows\Registration\Faculty\FacultyRegistrationWindow.xaml.cs" />
     <Compile Include="MainWindow.xaml.cs" />
     <Compile Include="Extensions\MySqlCommandExt.cs" />
     <Compile Include="Pages\Faculty.xaml.cs" />
