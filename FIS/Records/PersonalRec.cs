@@ -12,16 +12,20 @@ namespace FIS.Records
         internal string LastName { get; private set; }
         internal int Age { get; private set; }
         internal string Address { get; private set; }
-        internal int CellPhoneNo { get; private set; }
+        internal int PhoneNo { get; private set; }
         internal DateTime DateOfBirth { get; private set; }
         internal string PlaceOfBirth { get; private set; }
 
-        PersonalRec (string firstName, string middleName, string lastName, int age, string address, int cellPhoneNo, DateTime dateOfBirth, string placeOfBirth)
+        PersonalRec (string FirstName, string MiddleName, string LastName, int Age, string Address, int PhoneNo, DateTime DateOfBirth, string PlaceOfBirth)
         {
-            FirstName = firstName; MiddleName = middleName;
-            LastName = lastName; Age = age;
-            Address = address; CellPhoneNo = cellPhoneNo;
-            DateOfBirth = dateOfBirth; PlaceOfBirth = placeOfBirth;
+            this.FirstName = FirstName;
+            this.MiddleName = MiddleName;
+            this.LastName = LastName;
+            this.Age = Age;
+            this.Address = Address;
+            this.PhoneNo = PhoneNo;
+            this.DateOfBirth = DateOfBirth;
+            this.PlaceOfBirth = PlaceOfBirth;
         }
 
         /// <summary>
@@ -32,12 +36,12 @@ namespace FIS.Records
         /// <param name="LastName"></param>
         /// <param name="Age"></param>
         /// <param name="Address"></param>
-        /// <param name="CellPhoneNo"></param>
+        /// <param name="PhoneNo"></param>
         /// <param name="DateOfBirth"></param>
         /// <param name="PlaceOfBirth"></param>
         /// <returns>New Single Instance of Personal Record.</returns>
-        internal static PersonalRec Create (string FirstName, string MiddleName, string LastName, int Age, string Address, int CellPhoneNo, DateTime DateOfBirth, string PlaceOfBirth) =>
-            new PersonalRec(firstName: FirstName, middleName: MiddleName, lastName: LastName, age: Age, address: Address, cellPhoneNo: CellPhoneNo, dateOfBirth: DateOfBirth, placeOfBirth: PlaceOfBirth);
+        internal static PersonalRec Create (string FirstName, string MiddleName, string LastName, int Age, string Address, int PhoneNo, DateTime DateOfBirth, string PlaceOfBirth) =>
+            new PersonalRec(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, PhoneNo: PhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
 
         /// <summary>
         /// Creates A New Single Personal Record with the given First Name.
@@ -45,7 +49,7 @@ namespace FIS.Records
         /// <param name="FirstName"></param>
         /// <returns></returns>
         internal PersonalRec withFirstName (string FirstName) =>
-            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, CellPhoneNo: CellPhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
+            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, PhoneNo: PhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
         
         /// <summary>
         /// Creates A New Single Personal Record with the given Middle Name.
@@ -53,7 +57,7 @@ namespace FIS.Records
         /// <param name="MiddleName"></param>
         /// <returns></returns>
         internal PersonalRec withMiddleName (string MiddleName) =>
-            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, CellPhoneNo: CellPhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
+            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, PhoneNo: PhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
 
         /// <summary>
         /// Creates A New Single Personal Record with the given Last Name.
@@ -61,7 +65,7 @@ namespace FIS.Records
         /// <param name="LastName"></param>
         /// <returns></returns>
         internal PersonalRec withLastName (string LastName) =>
-            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, CellPhoneNo: CellPhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
+            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, PhoneNo: PhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
 
         /// <summary>
         /// Creates A New Single Personal Record with the given Age.
@@ -69,7 +73,7 @@ namespace FIS.Records
         /// <param name="Age"></param>
         /// <returns></returns>
         internal PersonalRec withAge (int Age) =>
-            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, CellPhoneNo: CellPhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
+            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, PhoneNo: PhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
 
         /// <summary>
         /// Creates A New Single Personal Record with the given Address.
@@ -77,15 +81,15 @@ namespace FIS.Records
         /// <param name="Address"></param>
         /// <returns></returns>
         internal PersonalRec withAddress (string Address) =>
-            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, CellPhoneNo: CellPhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
+            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, PhoneNo: PhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
 
         /// <summary>
         /// Creates A New Single Personal Record with the given Phone No.
         /// </summary>
-        /// <param name="CellPhoneNo"></param>
+        /// <param name="PhoneNo"></param>
         /// <returns></returns>
-        internal PersonalRec withCellphoneNo (int CellPhoneNo) =>
-            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, CellPhoneNo: CellPhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
+        internal PersonalRec withPhoneNo (int PhoneNo) =>
+            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, PhoneNo: PhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
 
         /// <summary>
         /// Creates A New Single Personal Record with the given Date of Birth.
@@ -93,7 +97,7 @@ namespace FIS.Records
         /// <param name="DateOfBirth"></param>
         /// <returns></returns>
         internal PersonalRec withDateOfBirth (DateTime DateOfBirth) =>
-            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, CellPhoneNo: CellPhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
+            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, PhoneNo: PhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
 
         /// <summary>
         /// Creates A New Single Personal Record with the given Place of Birth.
@@ -101,6 +105,6 @@ namespace FIS.Records
         /// <param name="PlaceOfBirth"></param>
         /// <returns></returns>
         internal PersonalRec withPlaceOfBirth (string PlaceOfBirth) =>
-            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, CellPhoneNo: CellPhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
+            Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, PhoneNo: PhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
     }
 }
