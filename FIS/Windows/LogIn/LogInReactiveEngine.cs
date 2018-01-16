@@ -16,7 +16,7 @@ using static System.Reactive.Linq.Observable;
 namespace FIS.Windows.LogIn
 {
     /// <summary>
-    /// Represents THe Reactive Engine for LogInWindow
+    /// Represents The Reactive Engine for LogInWindow
     /// </summary>
     class LogInReactiveEngine
     {
