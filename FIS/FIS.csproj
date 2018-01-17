@@ -72,7 +72,6 @@
     </Compile>
     <Compile Include="Lib\DatabaseQuery.cs" />
     <Compile Include="Lib\DataTableExt.cs" />
-    <Compile Include="Lib\Lin.cs" />
     <Compile Include="Lib\Option.cs" />
     <Compile Include="Lib\Util.cs" />
     <Compile Include="Windows\LogIn\LogInControls.cs" />
