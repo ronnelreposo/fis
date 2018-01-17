@@ -12,11 +12,11 @@ namespace FIS.Records
         internal string LastName { get; private set; }
         internal int Age { get; private set; }
         internal string Address { get; private set; }
-        internal int PhoneNo { get; private set; }
+        internal string PhoneNo { get; private set; }
         internal DateTime DateOfBirth { get; private set; }
         internal string PlaceOfBirth { get; private set; }
 
-        PersonalRec (string FirstName, string MiddleName, string LastName, int Age, string Address, int PhoneNo, DateTime DateOfBirth, string PlaceOfBirth)
+        PersonalRec (string FirstName, string MiddleName, string LastName, int Age, string Address, string PhoneNo, DateTime DateOfBirth, string PlaceOfBirth)
         {
             this.FirstName = FirstName;
             this.MiddleName = MiddleName;
@@ -40,7 +40,7 @@ namespace FIS.Records
         /// <param name="DateOfBirth"></param>
         /// <param name="PlaceOfBirth"></param>
         /// <returns>New Single Instance of Personal Record.</returns>
-        internal static PersonalRec Create (string FirstName, string MiddleName, string LastName, int Age, string Address, int PhoneNo, DateTime DateOfBirth, string PlaceOfBirth) =>
+        internal static PersonalRec Create (string FirstName, string MiddleName, string LastName, int Age, string Address, string PhoneNo, DateTime DateOfBirth, string PlaceOfBirth) =>
             new PersonalRec(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, PhoneNo: PhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace FIS.Records
         /// </summary>
         /// <param name="PhoneNo"></param>
         /// <returns></returns>
-        internal PersonalRec withPhoneNo (int PhoneNo) =>
+        internal PersonalRec withPhoneNo (string PhoneNo) =>
             Create(FirstName: FirstName, MiddleName: MiddleName, LastName: LastName, Age: Age, Address: Address, PhoneNo: PhoneNo, DateOfBirth: DateOfBirth, PlaceOfBirth: PlaceOfBirth);
 
         /// <summary>
