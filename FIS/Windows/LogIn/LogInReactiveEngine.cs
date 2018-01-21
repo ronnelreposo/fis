@@ -124,36 +124,31 @@ namespace FIS.Windows.LogIn
         /// </summary>
         /// <returns>LogInStreams</returns>
         internal IObservable<LogInStreams> LogInToStreams () =>
-           from fields in LogInStreamClickToLogInFields()
-           let errorField = fields.ErrorField
-           where errorField.IsNone
-           let sQueryAccountUsername = FromAsync(task => QueryAsync(Procedure: "get_faculty_account",
-                   paramValue: Tuple.Create("username", fields.Username as object),
-                   onFail: ex => MessageBox.Show(ex.Message)))
-           let sQueryAccountUsernameDataTable = from command in sQueryAccountUsername
-                                                select new DataTable().FillWithCommand(command)
-           let sQueryAccountUsernameHasRows = from dataTable in sQueryAccountUsernameDataTable
-                                              where dataTable.HasRows()
-                                              select dataTable
-           let sQueryAccountToPasswordMatch = from dataTable in sQueryAccountUsernameHasRows
-                                              let firstRow = dataTable.Rows[0]
-                                              let strPasswordHash = encodedPasswordHash(firstRow, fields.Password, SaltColIndex: 3)
-                                              let storedPasswordHash = retrievePasswordHash(firstRow, PasswordColIndex: 2)
-                                              let isPasswordHashMatch = strPasswordHash.Equals(storedPasswordHash)
-                                              select isPasswordHashMatch
-           let sPasswordMatch = from isPasswordMatch in sQueryAccountToPasswordMatch
-                                where isPasswordMatch
-                                select new MainWindow()
-           let sPasswordNotMatch = from isPasswordMatch in sQueryAccountToPasswordMatch
-                                   where !isPasswordMatch
-                                   select LogInControls.LogInWindow
-           let sUsernameNotRegistered = from dataTable in sQueryAccountUsernameDataTable
-                                      where !dataTable.HasRows()
-                                      select LogInControls.LogInWindow
-           select LogInStreams.Create(
-               SPasswordMatch: sPasswordMatch,
-               SPasswordNotMatch: sPasswordNotMatch,
-               SUsernameNotRegistered: sUsernameNotRegistered);
+            from fields in LogInStreamClickToLogInFields()
+                    let errorField = fields.ErrorField
+                    where errorField.IsNone
+                    let sQueryOptionUserAccount = FromAsync(_ => QueryUserAccountAsync(fields.Username))
+                    let sQueryOptionUserAccountExist = from queryOptionUserAccount in sQueryOptionUserAccount
+                                                       where queryOptionUserAccount.IsSome
+                                                       select queryOptionUserAccount
+                    let sQueryAccountToPasswordMatch = from queryOptionUserAccount in sQueryOptionUserAccountExist
+                                                       let queryUserAccount = queryOptionUserAccount.Value
+                                                       let strPasswordHash = encodePasswordHash(fields.Password, queryUserAccount.PasswordSalt)
+                                                       let isPasswordHashMatch = strPasswordHash.Equals(queryUserAccount.EncryptedPassword)
+                                                       select isPasswordHashMatch
+                    let sPasswordMatch = from isPasswordMatch in sQueryAccountToPasswordMatch
+                                         where isPasswordMatch
+                                         select new MainWindow()
+                    let sPasswordNotMatch = from isPasswordMatch in sQueryAccountToPasswordMatch
+                                            where !isPasswordMatch
+                                            select LogInControls.LogInWindow
+                    let sUsernameNotRegistered = from queryOptionUserAccount in sQueryOptionUserAccount
+                                                 where queryOptionUserAccount.IsNone
+                                                 select LogInControls.LogInWindow
+                    select LogInStreams.Create(
+                        SPasswordMatch: sPasswordMatch,
+                        SPasswordNotMatch: sPasswordNotMatch,
+                        SUsernameNotRegistered: sUsernameNotRegistered);
 
         /// <summary>
         /// On Registration Set Up
@@ -218,32 +213,18 @@ namespace FIS.Windows.LogIn
         } /* end SetUpOnLogIn */
 
         /// <summary>
-        /// Encodes the given password to Password Hash.
+        /// Facade for encoding password hash.
         /// </summary>
-        /// <param name="dataRow">The DataRow in which the SaltIndex can be retrieved.</param>
-        /// <param name="password">The given Password to be hashed.</param>
-        /// <param name="SaltColIndex">The index coloumn of the DataRow in which the salt can be retrieved.</param>
-        /// <returns>Encoded: Password Hash</returns>
-        string encodedPasswordHash (DataRow dataRow, string password, int SaltColIndex)
+        /// <param name="password">The given plain password.</param>
+        /// <param name="passwordSalt">the given password salt.</param>
+        /// <returns>Encoded password hash.</returns>
+        string encodePasswordHash(string password, string passwordSalt)
         {
-            var salt = new Guid(dataRow[SaltColIndex].ToString());
+            var salt = new Guid(passwordSalt);
             var passwordHash = DataHash(data: password, salt: salt);
             var strPasswordHash = ToBase64String(inArray: passwordHash.Item1);
 
             return strPasswordHash;
-        }
-
-        /// <summary>
-        /// Retrieves the Stored Hash Password in the DataRow given the PasswordColIndex.
-        /// </summary>
-        /// <param name="dataRow">The given DataRow in which the Password Hash can be found.</param>
-        /// <param name="PasswordColIndex">The Coloumn Index of the given Row.</param>
-        /// <returns>Retrieved: Password Hash</returns>
-        string retrievePasswordHash (DataRow dataRow, int PasswordColIndex)
-        {
-            var storedPasswordHash = dataRow[PasswordColIndex].ToString();
-
-            return storedPasswordHash;
         }
     }
 }
