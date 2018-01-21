@@ -26,6 +26,7 @@ namespace FIS.Lib
 
             var param = paramValue.Item1;
             var value = paramValue.Item2;
+
             Requires(string.IsNullOrEmpty(param));
             Requires(value != null);
 
@@ -99,6 +100,49 @@ namespace FIS.Lib
             catch ( Exception ex ) { onFail(ex); }
             finally { await readyCommand.Connection.CloseAsync(); }
             return readyCommand;
+        }
+
+        internal static async Task<Option<UserAccount>> QueryUserAccountAsync(string id, string procedure = "get_faculty_account", string queryParameter = "id")
+        {
+            var command = ConnectedCommand
+                    .CallProcedure(Procedure: procedure, QueryParameter: queryParameter)
+                    .WithParameter(Create<string, object>(queryParameter, id));
+            try
+            {
+                await command.Connection.OpenAsync();
+                await command.ExecuteNonQueryAsync();
+
+                var adapter = new MySqlDataAdapter(command);
+                var dt = new DataTable();
+                await adapter.FillAsync(dt);
+
+                using ( adapter )
+                using ( dt )
+                {
+                    const byte PasswordIndex = 2;
+                    const byte PasswordSaltIndex = 3;
+
+                    return dt.HasRows() ?
+                        Option<UserAccount>.Some(
+                            UserAccount.Create(
+                                dt.Rows[0][1].ToString(),
+                                dt.Rows[0][PasswordIndex].ToString(),
+                                dt.Rows[0][PasswordSaltIndex].ToString())
+                        )
+                        : Option<UserAccount>.None;
+                }
+            }
+            catch ( Exception err )
+            {
+                MessageBox.Show(err.Message);
+
+                return Option<UserAccount>.None;
+            }
+            finally
+            {
+                if (command.Connection.State == ConnectionState.Open)
+                    await command.Connection.CloseAsync();
+            }
         }
     }
 }
