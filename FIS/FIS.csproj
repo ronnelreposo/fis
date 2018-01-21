@@ -74,6 +74,7 @@
     <Compile Include="Lib\DataTableExt.cs" />
     <Compile Include="Lib\Option.cs" />
     <Compile Include="Lib\Util.cs" />
+    <Compile Include="Records\UserAccount.cs" />
     <Compile Include="Windows\LogIn\LogInControls.cs" />
     <Compile Include="Windows\LogIn\LogInFields.cs" />
     <Compile Include="Windows\LogIn\LogInReactiveEngine.cs" />
