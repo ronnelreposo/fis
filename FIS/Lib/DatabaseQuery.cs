@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 using FIS.Extensions;
 using static System.Diagnostics.Contracts.Contract;
 using static System.Tuple;
+using System.Windows;
+using FIS.Records;
 
 namespace FIS.Lib
 {
     internal static class DatabaseQuery
     {
-        static readonly string ConnectionString = "host=127.0.0.1;database=pmis;user=root;password=";
-        static readonly MySqlConnection Connection = new MySqlConnection(connectionString: ConnectionString);
-        static readonly MySqlCommand ConnectedCommand = new MySqlCommand().WithConnection(Connection: Connection);
+        static string ConnectionString { get; } = "host=127.0.0.1; database=pmis; user=root; password=";
+        static MySqlConnection Connection { get; } = new MySqlConnection(connectionString: ConnectionString);
+        static MySqlCommand ConnectedCommand { get; } = new MySqlCommand().WithConnection(Connection: Connection);
 
         static MySqlCommand CommandWithParameter (MySqlCommand command, Tuple<string, object> parameter_value) => command.WithParameter(parameter_value);
 
