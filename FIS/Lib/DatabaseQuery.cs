@@ -135,14 +135,14 @@ namespace FIS.Lib
             catch ( Exception err )
             {
                 MessageBox.Show(err.Message);
-
-                return Option<UserAccount>.None;
             }
             finally
             {
                 if (command.Connection.State == ConnectionState.Open)
                     await command.Connection.CloseAsync();
             }
+
+            return Option<UserAccount>.None;
         }
     }
 }
