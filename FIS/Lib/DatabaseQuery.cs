@@ -8,6 +8,8 @@ using static System.Diagnostics.Contracts.Contract;
 using static System.Tuple;
 using System.Windows;
 using FIS.Records;
+using System.Reactive.Linq;
+using System.Reactive;
 
 namespace FIS.Lib
 {
@@ -102,7 +104,36 @@ namespace FIS.Lib
             return readyCommand;
         }
 
-        internal static async Task<Option<UserAccount>> QueryUserAccountAsync(string id, string procedure = "get_faculty_account", string queryParameter = "id")
+        internal static Unit AddUserAccount (UserAccount userAccount, Action<bool> added, string procedure = "add_faculty_account")
+        {
+            ( from command in
+                  from u in Observable.FromAsync(_ =>
+                    ConnectedCommand.Connection.OpenAsync())
+                  select ConnectedCommand
+              let idParam = "@id"
+              let passwordParam = "@password"
+              let saltParam = "@salt"
+              let queryParams = $"{ idParam }, { passwordParam }, { saltParam }"
+              let commandWithParams = command
+                  .CallProcedure(procedure, queryParams)
+                  .WithParameter(Create(idParam, userAccount.Username as object))
+                  .WithParameter(Create(passwordParam, userAccount.EncryptedPassword as object))
+                  .WithParameter(Create(saltParam, userAccount.PasswordSalt as object))
+              let sAdded = from n in Observable.FromAsync(_ => commandWithParams.ExecuteNonQueryAsync())
+                           select n.Equals(1)
+              select new { Command = command, Added = sAdded.Single() } )
+
+            .Subscribe(onNext: obj =>
+            {
+                Observable.FromAsync(task => obj.Command.Connection.CloseAsync())
+                .Subscribe(onNext: _ => { added(obj.Added); }, onError: ex => MessageBox.Show(ex.Message));
+            },
+            onError: ex => MessageBox.Show(ex.Message));
+
+            return Unit.Default;
+        }
+
+        internal static async Task<Option<UserAccount>> QueryUserAccountAsync(string id, string procedure = "get_faculty_account", string queryParameter = "@id")
         {
             var command = ConnectedCommand
                     .CallProcedure(Procedure: procedure, QueryParameter: queryParameter)
